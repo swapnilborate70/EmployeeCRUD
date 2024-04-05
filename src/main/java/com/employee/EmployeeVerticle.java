@@ -1,5 +1,6 @@
 package com.employee;
 
+import com.employee.data.DbConnect;
 import com.employee.data.DbVerticle;
 import com.employee.routers.RoutersVerticle;
 import com.employee.service.ServiceVerticle;
@@ -25,6 +26,7 @@ public class EmployeeVerticle extends AbstractVerticle {
     vertx.deployVerticle(new DbVerticle());
     vertx.deployVerticle(new ServiceVerticle());
     vertx.deployVerticle(new RoutersVerticle(subRouter));
+    vertx.deployVerticle(new DbConnect());
 
 
     vertx.createHttpServer().requestHandler(router).listen(8888, http -> {

@@ -3,10 +3,14 @@ package com.employee.routers;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
+
+import java.util.List;
+import java.util.Objects;
 
 public class RoutersVerticle extends AbstractVerticle {
 
@@ -24,12 +28,14 @@ public class RoutersVerticle extends AbstractVerticle {
     subRouter.route("/employee/:id").method(HttpMethod.GET).handler(this::getEmployeeHandler);
     subRouter.route("/employees").method(HttpMethod.GET).handler(this::getAllEmployeeHandler);
     subRouter.route("/employee/:id").method(HttpMethod.DELETE).handler(this::deleteEmployeeHandler);
-    subRouter.route("/employee").method(HttpMethod.PUT).handler(this::updateEmployee);
+    subRouter.route("/employee/:id").method(HttpMethod.PUT).handler(this::updateEmployee);
   }
 
   private void updateEmployee(RoutingContext routingContext) {
+    int id = Integer.parseInt(routingContext.pathParam("id"));
     JsonObject object = routingContext.body().asJsonObject();
-    vertx.eventBus().request("service.update",object,req->{
+    JsonObject updateDetails = new JsonObject().put("id",id).put("jsonobject",object);
+    vertx.eventBus().request("service.update",updateDetails,req->{
       if(req.succeeded())
       {
         routingContext.response().putHeader("content-type", "application/json");
@@ -45,6 +51,10 @@ public class RoutersVerticle extends AbstractVerticle {
       if(req.succeeded()){
         routingContext.response().putHeader("content-type", "application/json");
         routingContext.response().end(new JsonObject().put("status","Deleted successfully").encode());
+      } else {
+        routingContext.response().putHeader("content-type", "application/json");
+        routingContext.response().end(new JsonObject().put("status","not deleted successfully").encode());
+
       }
     });
   }
@@ -53,11 +63,11 @@ public class RoutersVerticle extends AbstractVerticle {
   {
     vertx.eventBus().request("service.get.all","", req->{
 
-      JsonArray jsonArray = (JsonArray) req.result().body();
-
+      Object object = req.result().body();
+      JsonArray object1 = JsonArray.of(object);
       routingContext.response().putHeader("content-type", "application/json");
 
-      routingContext.response().end(jsonArray.encodePrettily());
+      routingContext.response().end(object1.encodePrettily());
     });
   }
 

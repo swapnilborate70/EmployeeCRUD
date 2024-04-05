@@ -3,6 +3,7 @@ package com.employee.service;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 public class ServiceVerticle extends AbstractVerticle {
@@ -11,6 +12,8 @@ public class ServiceVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
+
+
     startPromise.complete();
     vertx.eventBus().<JsonObject>consumer("service.add").handler(this::addEmployee);
     vertx.eventBus().<Integer>consumer("service.get").handler(this::getEmployee);
@@ -21,10 +24,12 @@ public class ServiceVerticle extends AbstractVerticle {
 
   private void updateEmployee(Message<JsonObject> objectMessage) {
     JsonObject object = objectMessage.body();
+
     vertx.eventBus().request("db.update",object,req->{
       if(req.succeeded())
       {
-        objectMessage.reply(true);
+        JsonObject object1 = JsonObject.mapFrom(req.result());
+        objectMessage.reply(object1);
       }
     });
   }
@@ -45,7 +50,8 @@ public class ServiceVerticle extends AbstractVerticle {
     vertx.eventBus().request("db.findAll","",handler->{
       if(handler.succeeded())
       {
-        Object object = handler.result().body();
+        Object object =  handler.result().body();
+
         objectMessage.reply(object);
       }
     });
