@@ -2,12 +2,9 @@ package employee.handler;
 
 import employee.response.Response;
 import employee.service.EmployeeService;
-import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-
-import java.util.List;
 
 public class EmployeeHandler {
 
@@ -20,7 +17,7 @@ public class EmployeeHandler {
     public void create(RoutingContext  rcx) {
       final JsonObject jsonObject = rcx.body().asJsonObject();
       employeeService.createEmployee(jsonObject)
-        .onSuccess(success -> Response.createdResponse(rcx, success))
+        .onSuccess(success -> Response.createdResponse(rcx))
         .onFailure(fail -> Response.failResponse(rcx, fail));
     }
 
@@ -45,7 +42,7 @@ public class EmployeeHandler {
     final int id = Integer.parseInt(rc.pathParam("id"));
     JsonObject jsonObject = rc.body().asJsonObject();
     employeeService.updateEmployee(id,jsonObject)
-      .onSuccess(success-> Response.updateResponse(rc,success))
+      .onSuccess(success-> Response.updateResponse(rc))
       .onFailure(failure-> Response.notFoundResponse(rc, failure.getMessage()));
   }
 

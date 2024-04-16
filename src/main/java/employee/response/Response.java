@@ -10,14 +10,14 @@ public class Response {
 
   private static final String CONTENT_TYPE_HEADER = "Content-Type";
   private static final String APPLICATION_JSON = "application/json";
-  public static void createdResponse(RoutingContext rcx, Object response)
+  public static void createdResponse(RoutingContext rcx)
   {
     rcx.response().setStatusCode(201)
       .putHeader(CONTENT_TYPE_HEADER, APPLICATION_JSON)
       .end(Json.encodePrettily(new JsonObject().put("status","Success")));
   }
 
-  public static void updateResponse(RoutingContext rc, Object response)
+  public static void updateResponse(RoutingContext rc)
   {
     rc.response().setStatusCode(201)
       .putHeader(CONTENT_TYPE_HEADER, APPLICATION_JSON)

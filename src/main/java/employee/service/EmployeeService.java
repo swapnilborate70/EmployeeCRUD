@@ -2,16 +2,14 @@ package employee.service;
 
 import employee.repository.EmployeeRepository;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class EmployeeService
 {
 
-  private EmployeeRepository employeeRepository;
+  private final EmployeeRepository employeeRepository;
 
   public EmployeeService(EmployeeRepository employeeRepository) {
     this.employeeRepository = employeeRepository;
@@ -55,7 +53,7 @@ public class EmployeeService
         if (result != null) {
           return Future.succeededFuture();
         } else {
-          return Future.failedFuture("Update failed");
+          return Future.failedFuture("Update failed. Record not found with ID : "+id+" ");
         }
       });
   }
