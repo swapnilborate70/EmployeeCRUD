@@ -3,42 +3,42 @@ package employee.service;
 import employee.Constant;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 
-public class EmployeeService implements IService {
+import java.util.List;
+
+public class DepartmentService implements IService {
 
   private final Vertx vertx;
 
-  public EmployeeService(Vertx vertx) {
+  public DepartmentService(Vertx vertx) {
     this.vertx = vertx;
   }
 
   @Override
-  public Constant.Collection collection() {
-    return Constant.Collection.EMPLOYEE;
+  public Vertx vertx() {
+    return null;
   }
 
   @Override
-  public Vertx vertx() {
-    return vertx;
+  public Constant.Collection collection() {
+    return Constant.Collection.DEPARTMENT;
   }
 
   @Override
   public Future<JsonObject> find(int id) {
-    // TODO: To Be Implemented
     return null;
   }
 
 
   @Override
   public Future<Void> update(int id, JsonObject document) {
-    // TODO: To Be Implemented
     return null;
   }
 
   @Override
   public Future<Void> delete(int id) {
-    // TODO: To Be Implemented
     return null;
   }
 }

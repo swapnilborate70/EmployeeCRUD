@@ -10,6 +10,7 @@ public class Response {
 
   private static final String CONTENT_TYPE_HEADER = "Content-Type";
   private static final String APPLICATION_JSON = "application/json";
+
   public static void createdResponse(RoutingContext rcx)
   {
     rcx.response().setStatusCode(201)
