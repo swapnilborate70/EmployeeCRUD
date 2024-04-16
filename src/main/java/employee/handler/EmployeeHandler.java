@@ -10,32 +10,32 @@ public class EmployeeHandler {
 
   final EmployeeService employeeService;
 
-    public EmployeeHandler(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
+  public EmployeeHandler(EmployeeService employeeService) {
+    this.employeeService = employeeService;
+  }
 
-    public void create(RoutingContext  rcx) {
-      final JsonObject jsonObject = rcx.body().asJsonObject();
-      employeeService.createEmployee(jsonObject)
-        .onSuccess(success -> Response.createdResponse(rcx))
-        .onFailure(fail -> Response.failResponse(rcx, fail));
-    }
+  public void create(RoutingContext rcx) {
+    final JsonObject jsonObject = rcx.body().asJsonObject();
+    employeeService.addEmployee(jsonObject)
+      .onSuccess(success -> Response.createdResponse(rcx))
+      .onFailure(fail -> Response.failResponse(rcx, fail));
+  }
 
-    public void get(RoutingContext rc)
-    {
-      final int id = Integer.parseInt(rc.pathParam("id"));
-      employeeService.getEmployee(id)
-        .onSuccess(success-> Response.getResponse(rc,success))
-        .onFailure(failure-> Response.notFoundResponse(rc, failure.getMessage()));
-    }
+  public void get(RoutingContext rc)
+  {
+    final int id = Integer.parseInt(rc.pathParam("id"));
+    employeeService.getEmployee(id)
+      .onSuccess(success-> Response.getResponse(rc,success))
+      .onFailure(failure-> Response.notFoundResponse(rc, failure.getMessage()));
+  }
 
-    public void delete(RoutingContext rc)
-    {
-      final int id = Integer.parseInt(rc.pathParam("id"));
-      employeeService.deleteEmployee(id)
-        .onSuccess(success-> Response.deleteResponse(rc, success))
-        .onFailure(failure-> Response.notFoundResponse(rc, failure.getMessage()));
-    }
+  public void delete(RoutingContext rc)
+  {
+    final int id = Integer.parseInt(rc.pathParam("id"));
+    employeeService.deleteEmployee(id)
+      .onSuccess(success-> Response.deleteResponse(rc, success))
+      .onFailure(failure-> Response.notFoundResponse(rc, failure.getMessage()));
+  }
 
   public void update(RoutingContext rc)
   {
@@ -46,18 +46,19 @@ public class EmployeeHandler {
       .onFailure(failure-> Response.notFoundResponse(rc, failure.getMessage()));
   }
 
-    public void getAll(RoutingContext rc)
-    {
-      JsonArray jsonArray = new JsonArray();
-      employeeService.getAllEmployees()
-        .onSuccess(success->{
-          for(JsonObject jsonObject : success)
-          {
-            jsonArray.add(jsonObject);
-          }
-          Response.getResponse(rc, jsonArray);
-        }).onFailure(failure->{
-          Response.notFoundResponse(rc,failure.getMessage());
-        });
-    }
+  public void getAll(RoutingContext rc)
+  {
+    JsonArray jsonArray = new JsonArray();
+    employeeService.getAllEmployees()
+      .onSuccess(success->{
+        for(JsonObject jsonObject : success)
+        {
+          jsonArray.add(jsonObject);
+        }
+        Response.getResponse(rc, jsonArray);
+      }).onFailure(failure->{
+        Response.notFoundResponse(rc,failure.getMessage());
+      });
+  }
+
 }

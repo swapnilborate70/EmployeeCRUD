@@ -15,10 +15,11 @@ import io.vertx.ext.web.handler.BodyHandler;
 public class ApiVerticle extends AbstractVerticle {
 
   private MongoClient mongoClient;
-  final Router mainRouter = Router.router(vertx);
 
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
+
+    Router mainRouter = Router.router(vertx);
 
     mainRouter.route().handler(BodyHandler.create());
 
@@ -31,7 +32,7 @@ public class ApiVerticle extends AbstractVerticle {
         JsonObject configJsonObject = dbConfig.result().toJsonObject();
         JsonObject mongoConfig = configJsonObject.getJsonObject("mongo");
         this.mongoClient = MongoClient.create(vertx, mongoConfig);
-        initializeObjects();
+        initializeObjects(mainRouter);
       }
       else
       {
@@ -56,10 +57,10 @@ public class ApiVerticle extends AbstractVerticle {
         }
       });
   }
-  public void initializeObjects()
+  public void initializeObjects(Router mainRouter)
   {
-    EmployeeRepository employeeRepository = new EmployeeRepository(mongoClient);
-    EmployeeService employeeService = new EmployeeService(employeeRepository);
+    EmployeeRepository employeeRepository = new EmployeeRepository();
+    EmployeeService employeeService = new EmployeeService(employeeRepository,mongoClient);
     EmployeeHandler employeeHandler = new EmployeeHandler(employeeService);
     final EmployeeRouter employeeRouter = new EmployeeRouter(vertx,employeeHandler,mainRouter);
     employeeRouter.empRouters();
