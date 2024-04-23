@@ -27,7 +27,7 @@ public class Database extends AbstractVerticle {
   public void start(Promise<Void> startPromise) throws Exception {
 
     vertx.executeBlocking(() ->
-      vertx.fileSystem().readFile(Constant.PATH, dbConfig -> {
+      vertx.fileSystem().readFile(Constant.FILE_PATH, dbConfig -> {
         if (dbConfig.succeeded()) {
           JsonObject mongoConfig = dbConfig.result().toJsonObject().getJsonObject(Constant.DB_CONFIG_FILE_KEY);
           this.mongoClient = MongoClient.create(vertx, mongoConfig);

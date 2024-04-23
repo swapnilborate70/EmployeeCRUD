@@ -18,7 +18,7 @@ public class Constant {
 
   public static final String DOCUMENT = "document";
 
-  public static final String PATH = "config.json";
+  public static final String FILE_PATH = "config.json";
 
   public static final String DB_CONFIG_FILE_KEY = "mongo";
 

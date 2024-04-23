@@ -10,9 +10,7 @@ public class EmployeeRoute extends APIRouter{
 
   public EmployeeRoute(Router router, Vertx vertx, Validation validation)
   {
-
     super(router, new EmployeeService(vertx), ConstantPATH.EMP, validation);
-
   }
 
 }

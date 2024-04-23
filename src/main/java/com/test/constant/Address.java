@@ -6,9 +6,7 @@ public enum Address {
   UPDATE,
   DELETE,
   FIND,
-  FIND_ALL,
-
-  VALIDATE_UNIQUE;
+  FIND_ALL;
 
   public String address()
   {
