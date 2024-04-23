@@ -1,6 +1,7 @@
 package com.test.validation;
 
 import com.test.constant.Constant;
+import io.netty.util.internal.StringUtil;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
@@ -16,11 +17,11 @@ public class DepartmentValidation extends Validation {
     String deptID = document.getString(Constant.DEPT_ID);
     String name = document.getString(Constant.DEPT_NAME);
 
-    if ((name == null || name.isBlank() || name.isEmpty())) {
+    if ((name == null || StringUtil.isNullOrEmpty(name))) {
       failedKeys.put(Constant.NAME, name);
     }
 
-    if ((deptID == null || deptID.isEmpty() || deptID.isBlank())) {
+    if ((deptID == null || StringUtil.isNullOrEmpty(deptID))) {
       failedKeys.put(Constant.DEPT_ID, deptID);
     }
 

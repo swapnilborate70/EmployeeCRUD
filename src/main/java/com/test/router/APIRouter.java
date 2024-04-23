@@ -91,9 +91,8 @@ public abstract class APIRouter {
   {
 
     JsonObject failedKeys = validate.validate(routingContext);
-    boolean result = failedKeys.isEmpty();
 
-    if(result)
+    if(failedKeys.isEmpty())
     {
       routingContext.next();
     }
