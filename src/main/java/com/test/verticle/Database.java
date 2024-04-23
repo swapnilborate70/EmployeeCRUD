@@ -26,7 +26,6 @@ public class Database extends AbstractVerticle {
   @Override
   public void start(Promise<Void> startPromise) throws Exception {
 
-    vertx.executeBlocking(() ->
       vertx.fileSystem().readFile(Constant.FILE_PATH, dbConfig -> {
         if (dbConfig.succeeded()) {
           JsonObject mongoConfig = dbConfig.result().toJsonObject().getJsonObject(Constant.DB_CONFIG_FILE_KEY);
@@ -48,7 +47,7 @@ public class Database extends AbstractVerticle {
         {
           startPromise.fail(dbConfig.cause());
         }
-      }));
+      });
   }
 
   private void update(Message<JsonObject> message) {

@@ -22,4 +22,8 @@ public class Constant {
 
   public static final String DB_CONFIG_FILE_KEY = "mongo";
 
+  public static final String STATUS = "status";
+
+  public static final String FAILED_KEYS = "failed_keys";
+
 }

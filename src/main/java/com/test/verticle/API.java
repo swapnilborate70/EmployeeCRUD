@@ -1,14 +1,7 @@
 package com.test.verticle;
 
-import com.mongodb.internal.connection.tlschannel.impl.TlsChannelImpl;
-import com.test.constant.ConstantPATH;
 import com.test.router.DepartmentRouter;
-import com.test.router.EmployeeRoute;
-import com.test.service.EmployeeService;
-import com.test.service.Services;
-import com.test.validation.DepartmentValidation;
-import com.test.validation.EmployeeValidation;
-import com.test.validation.Validation;
+import com.test.router.EmployeeRouter;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.ext.web.Router;
@@ -27,8 +20,8 @@ public class API extends AbstractVerticle {
     mainRouter.route().handler(BodyHandler.create());
 
 
-    new EmployeeRoute(mainRouter,vertx, new EmployeeValidation());
-    new DepartmentRouter(mainRouter,vertx, new DepartmentValidation());
+    new EmployeeRouter(mainRouter,vertx);
+    new DepartmentRouter(mainRouter,vertx);
 
     final int port = 8888;
 

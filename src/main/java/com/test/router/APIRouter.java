@@ -1,6 +1,6 @@
 package com.test.router;
 
-import com.test.constant.ConstantPATH;
+import com.test.constant.PATH;
 import com.test.constant.ResponseConstants;
 import com.test.response.Response;
 import com.test.service.Services;
@@ -10,21 +10,24 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 
 public abstract class APIRouter {
-    public Services service;
+  public Services service;
 
-  public APIRouter(Router router, Services service, String PATH, Validation validation) {
+  public Validation validate;
+
+  public APIRouter(Router router, Services service, String path, Validation validation) {
     this.service= service;
+    this.validate=validation;
 
-    router.post(PATH).handler(validation::validate).handler(this::create);
-    router.get(PATH+"/:id").handler(this::get);
-    router.get(PATH+"s").handler(this::getAll);
-    router.delete(PATH+"/:id").handler(this::delete);
-    router.put(PATH+"/:id").handler(this::update);
+    router.post(path).handler(this::validate).handler(this::create);
+    router.get(path+"/:id").handler(this::get);
+    router.get(path+"s").handler(this::getAll);
+    router.delete(path+"/:id").handler(this::delete);
+    router.put(path+"/:id").handler(validate::validate).handler(this::update);
   }
 
   private void update(RoutingContext routingContext) {
     JsonObject document = routingContext.body().asJsonObject();
-    int id = Integer.parseInt(routingContext.pathParam(ConstantPATH.ID));
+    int id = Integer.parseInt(routingContext.pathParam(PATH.PARAM_ID.getName()));
 
     service.update(id,document)
       .onSuccess(success ->{
@@ -37,7 +40,7 @@ public abstract class APIRouter {
   }
 
   private void delete(RoutingContext routingContext) {
-    int id = Integer.parseInt(routingContext.pathParam(ConstantPATH.ID));
+    int id = Integer.parseInt(routingContext.pathParam(PATH.PARAM_ID.getName()));
     service.delete(id)
       .onSuccess(success ->{
         if(success.body() != null)
@@ -51,13 +54,13 @@ public abstract class APIRouter {
   private void getAll(RoutingContext routingContext) {
     service.getAll()
       .onSuccess(success ->{
-        Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,success.body());
+        Response.jsonArrayResponse(routingContext,ResponseConstants.SUCCESS_CODE,success.body());
       })
       .onFailure(fail -> Response.response(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
   }
 
   private void get(RoutingContext routingContext) {
-    int id = Integer.parseInt(routingContext.pathParam(ConstantPATH.ID));
+    int id = Integer.parseInt(routingContext.pathParam(PATH.PARAM_ID.getName()));
     service.get(id)
       .onSuccess(success -> {
         JsonObject document = success.body();
@@ -72,16 +75,31 @@ public abstract class APIRouter {
   }
 
   public void create(RoutingContext routingContext)
-    {
-      JsonObject document =  routingContext.body().asJsonObject();
-      service.create(document)
-        .onSuccess(success-> {
-          if(success !=null)
-          {
-            Response.response(routingContext, ResponseConstants.CREATE_SUCCESS_CODE,ResponseConstants.CREATE_SUCCESS_STATUS);
-          }
-        })
-        .onFailure(fail-> Response.response(routingContext,500,fail.getMessage()));
-    }
+  {
+    JsonObject document =  routingContext.body().asJsonObject();
+    service.create(document)
+      .onSuccess(success-> {
+        if(success !=null)
+        {
+          Response.response(routingContext, ResponseConstants.CREATE_SUCCESS_CODE,ResponseConstants.CREATE_SUCCESS_STATUS);
+        }
+      })
+      .onFailure(fail-> Response.response(routingContext,500,fail.getMessage()));
+  }
 
+  public void validate(RoutingContext routingContext)
+  {
+
+    JsonObject failedKeys = validate.validate(routingContext);
+    boolean result = failedKeys.isEmpty();
+
+    if(result)
+    {
+      routingContext.next();
+    }
+    else
+    {
+       Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,JsonObject.of("failed keys",failedKeys));
+    }
+  }
 }
