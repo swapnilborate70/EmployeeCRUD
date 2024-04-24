@@ -17,11 +17,11 @@ public class Response {
     } else if (payload instanceof JsonArray) {
       rc.response().end(Json.encodePrettily((JsonArray) payload));
     } else if (payload instanceof String) {
-      rc.response().end(Json.encodePrettily(new JsonObject().put("status", payload)));
+      rc.response().end(Json.encodePrettily(JsonObject.of("status", payload)));
     } else {
-      // Handle unsupported types or throw an exception
+      // if unsupported types
       rc.response().setStatusCode(500)
-        .end(Json.encodePrettily(new JsonObject().put("error", "Unsupported payload type")));
+        .end(Json.encodePrettily( JsonObject.of("error", "Unsupported payload type")));
     }
   }
 
