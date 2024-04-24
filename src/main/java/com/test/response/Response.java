@@ -1,32 +1,28 @@
 package com.test.response;
 
+import com.test.constant.ResponseConstants;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 
 public class Response {
-  private static final String CONTENT_TYPE_HEADER = "Content-Type";
-  private static final String APPLICATION_JSON = "application/json";
 
-  public static void response(RoutingContext rc,int statusCode,String message)
-  {
+  public static <T> void jsonResponse(RoutingContext rc, int statusCode, T payload) {
     rc.response().setStatusCode(statusCode)
-      .putHeader(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-      .end(Json.encodePrettily(new JsonObject().put("status",message)));
+      .putHeader(ResponseConstants.CONTENT_TYPE_HEADER, ResponseConstants.APPLICATION_JSON);
+
+    if (payload instanceof JsonObject) {
+      rc.response().end(Json.encodePrettily((JsonObject) payload));
+    } else if (payload instanceof JsonArray) {
+      rc.response().end(Json.encodePrettily((JsonArray) payload));
+    } else if (payload instanceof String) {
+      rc.response().end(Json.encodePrettily(new JsonObject().put("status", payload)));
+    } else {
+      // Handle unsupported types or throw an exception
+      rc.response().setStatusCode(500)
+        .end(Json.encodePrettily(new JsonObject().put("error", "Unsupported payload type")));
+    }
   }
 
-  public static void jsonResponse(RoutingContext rc,int statusCode, JsonObject document)
-  {
-    rc.response().setStatusCode(statusCode)
-      .putHeader(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-      .end(Json.encodePrettily(document));
-  }
-
-  public static void jsonArrayResponse(RoutingContext rc,int statusCode, JsonArray documents)
-  {
-    rc.response().setStatusCode(statusCode)
-      .putHeader(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-      .end(Json.encodePrettily(documents));
-  }
 }

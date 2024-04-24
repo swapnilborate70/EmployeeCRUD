@@ -16,22 +16,22 @@ public interface Services {
   Entity collection();
 
   default Future<Message<String>> create(JsonObject document) {
-    return vertx().eventBus().request(Address.CREATE.address(),JsonObject.of(Constant.COLLECTION,collection().getName(), Constant.DOCUMENT,document));
+    return vertx().eventBus().request(Address.CREATE.address(), JsonObject.of(Constant.COLLECTION, collection().getName(), Constant.DOCUMENT, document));
   }
 
   default Future<Message<JsonObject>> get(int id) {
-    return vertx().eventBus().request(Address.FIND.address(), JsonObject.of(Constant.COLLECTION,collection().getName(), Constant.ID,id));
+    return vertx().eventBus().request(Address.FIND.address(), JsonObject.of(Constant.COLLECTION, collection().getName(), Constant.ID, id));
   }
 
   default Future<Message<JsonArray>> getAll() {
-    return vertx().eventBus().request(Address.FIND_ALL.address(), JsonObject.of(Constant.COLLECTION,collection().getName()));
+    return vertx().eventBus().request(Address.FIND_ALL.address(), JsonObject.of(Constant.COLLECTION, collection().getName()));
   }
 
   default Future<Message<JsonObject>> delete(int id) {
-    return vertx().eventBus().request(Address.DELETE.address(), JsonObject.of(Constant.COLLECTION,collection().getName(),Constant.ID,id));
+    return vertx().eventBus().request(Address.DELETE.address(), JsonObject.of(Constant.COLLECTION, collection().getName(), Constant.ID, id));
   }
 
-  default Future<Message<JsonObject>> update(int id,JsonObject document) {
-    return vertx().eventBus().request(Address.UPDATE.address(), JsonObject.of(Constant.COLLECTION,collection().getName(),Constant.ID,id,Constant.DOCUMENT,document));
+  default Future<Message<JsonObject>> update(int id, JsonObject document) {
+    return vertx().eventBus().request(Address.UPDATE.address(), JsonObject.of(Constant.COLLECTION, collection().getName(), Constant.ID, id, Constant.DOCUMENT, document));
   }
 }

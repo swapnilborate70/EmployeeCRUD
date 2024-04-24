@@ -20,8 +20,8 @@ public class API extends AbstractVerticle {
     mainRouter.route().handler(BodyHandler.create());
 
 
-    new EmployeeRouter(mainRouter,vertx);
-    new DepartmentRouter(mainRouter,vertx);
+    new EmployeeRouter(mainRouter, vertx);
+    new DepartmentRouter(mainRouter, vertx);
 
     final int port = 8888;
 

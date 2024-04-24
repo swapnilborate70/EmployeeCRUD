@@ -5,8 +5,6 @@ import io.netty.util.internal.StringUtil;
 import io.vertx.core.json.JsonObject;
 
 public class DepartmentValidation extends Validation {
-
-
   @Override
   public JsonObject checkInvalidPairs(JsonObject document) {
 

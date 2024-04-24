@@ -3,7 +3,7 @@ package com.test.service;
 import com.test.constant.Entity;
 import io.vertx.core.Vertx;
 
-public class DepartmentService implements Services{
+public class DepartmentService implements Services {
 
   private final Vertx vertx;
 

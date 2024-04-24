@@ -33,10 +33,10 @@ public abstract class APIRouter {
       .onSuccess(success ->{
         if(success.body() != null)
         {
-          Response.response(routingContext,ResponseConstants.SUCCESS_CODE,ResponseConstants.UPDATE_SUCCESS_STATUS);
-        } else Response.response(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
+          Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,ResponseConstants.UPDATE_SUCCESS_STATUS);
+        } else Response.jsonResponse(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
       })
-      .onFailure(fail -> Response.response(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
+      .onFailure(fail -> Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
   }
 
   private void delete(RoutingContext routingContext) {
@@ -45,18 +45,18 @@ public abstract class APIRouter {
       .onSuccess(success ->{
         if(success.body() != null)
         {
-          Response.response(routingContext,ResponseConstants.SUCCESS_CODE,ResponseConstants.DELETE_SUCCESS_STATUS);
-        } Response.response(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
+          Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,ResponseConstants.DELETE_SUCCESS_STATUS);
+        } Response.jsonResponse(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
       })
-      .onFailure(fail -> Response.response(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
+      .onFailure(fail -> Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
   }
 
   private void getAll(RoutingContext routingContext) {
     service.getAll()
       .onSuccess(success ->{
-        Response.jsonArrayResponse(routingContext,ResponseConstants.SUCCESS_CODE,success.body());
+        Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,success.body());
       })
-      .onFailure(fail -> Response.response(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
+      .onFailure(fail -> Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
   }
 
   private void get(RoutingContext routingContext) {
@@ -67,10 +67,10 @@ public abstract class APIRouter {
         if(document != null)
         {
           Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,document);
-        } else Response.response(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
+        } else Response.jsonResponse(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
       })
       .onFailure(fail -> {
-        Response.response(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage());
+        Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage());
       });
   }
 
@@ -81,10 +81,10 @@ public abstract class APIRouter {
       .onSuccess(success-> {
         if(success !=null)
         {
-          Response.response(routingContext, ResponseConstants.CREATE_SUCCESS_CODE,ResponseConstants.CREATE_SUCCESS_STATUS);
+          Response.jsonResponse(routingContext, ResponseConstants.CREATE_SUCCESS_CODE,ResponseConstants.CREATE_SUCCESS_STATUS);
         }
       })
-      .onFailure(fail-> Response.response(routingContext,500,fail.getMessage()));
+      .onFailure(fail-> Response.jsonResponse(routingContext,500,fail.getMessage()));
   }
 
   public void validate(RoutingContext routingContext)

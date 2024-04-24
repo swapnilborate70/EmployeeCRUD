@@ -4,7 +4,7 @@ import com.test.constant.Constant;
 import io.netty.util.internal.StringUtil;
 import io.vertx.core.json.JsonObject;
 
-public class EmployeeValidation extends Validation{
+public class EmployeeValidation extends Validation {
   @Override
   public JsonObject checkInvalidPairs(JsonObject document) {
 

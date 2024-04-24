@@ -20,4 +20,7 @@ public class ResponseConstants {
 
   public static final String VALIDATION_FAILED = "Validation failed";
 
+  public static final String CONTENT_TYPE_HEADER = "Content-Type";
+  public static final String APPLICATION_JSON = "application/json";
+
 }
