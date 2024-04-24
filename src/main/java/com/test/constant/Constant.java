@@ -26,4 +26,6 @@ public class Constant {
 
   public static final String FAILED_KEYS = "failed_keys";
 
+  public static final String PATH_VARIABLE = "id";
+
 }

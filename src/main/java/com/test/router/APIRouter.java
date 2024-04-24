@@ -1,6 +1,6 @@
 package com.test.router;
 
-import com.test.constant.PATH;
+import com.test.constant.Constant;
 import com.test.constant.ResponseConstants;
 import com.test.response.Response;
 import com.test.service.Services;
@@ -22,12 +22,12 @@ public abstract class APIRouter {
     router.get(path+"/:id").handler(this::get);
     router.get(path+"s").handler(this::getAll);
     router.delete(path+"/:id").handler(this::delete);
-    router.put(path+"/:id").handler(validate::validate).handler(this::update);
+    router.put(path+"/:id").handler(this::validate).handler(this::update);
   }
 
   private void update(RoutingContext routingContext) {
     JsonObject document = routingContext.body().asJsonObject();
-    int id = Integer.parseInt(routingContext.pathParam(PATH.PARAM_ID.getName()));
+    int id = Integer.parseInt(routingContext.pathParam(Constant.PATH_VARIABLE));
 
     service.update(id,document)
       .onSuccess(success ->{
@@ -40,7 +40,7 @@ public abstract class APIRouter {
   }
 
   private void delete(RoutingContext routingContext) {
-    int id = Integer.parseInt(routingContext.pathParam(PATH.PARAM_ID.getName()));
+    int id = Integer.parseInt(routingContext.pathParam(Constant.PATH_VARIABLE));
     service.delete(id)
       .onSuccess(success ->{
         if(success.body() != null)
@@ -60,7 +60,7 @@ public abstract class APIRouter {
   }
 
   private void get(RoutingContext routingContext) {
-    int id = Integer.parseInt(routingContext.pathParam(PATH.PARAM_ID.getName()));
+    int id = Integer.parseInt(routingContext.pathParam(Constant.PATH_VARIABLE));
     service.get(id)
       .onSuccess(success -> {
         JsonObject document = success.body();
@@ -90,15 +90,16 @@ public abstract class APIRouter {
   public void validate(RoutingContext routingContext)
   {
 
-    JsonObject failedKeys = validate.validate(routingContext);
+    JsonObject document = routingContext.body().asJsonObject();
+    boolean result  = validate.validate(document);
 
-    if(failedKeys.isEmpty())
+    if(result)
     {
       routingContext.next();
     }
     else
     {
-       Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,JsonObject.of("failed keys",failedKeys));
+      Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,JsonObject.of(Constant.STATUS,ResponseConstants.VALIDATION_FAILED,Constant.FAILED_KEYS,validate.countFailedValidations(document)));
     }
   }
 }

@@ -1,6 +1,6 @@
 package com.test.service;
 
-import com.test.constant.Collection;
+import com.test.constant.Entity;
 import io.vertx.core.Vertx;
 
 public class EmployeeService implements Services{
@@ -17,7 +17,7 @@ public class EmployeeService implements Services{
   }
 
   @Override
-  public Collection collection() {
-    return Collection.EMPLOYEE;
+  public Entity collection() {
+    return Entity.EMPLOYEE;
   }
 }

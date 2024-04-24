@@ -1,6 +1,7 @@
 package com.test.router;
 
-import com.test.constant.PATH;
+import com.test.constant.Constant;
+import com.test.constant.Entity;
 import com.test.service.EmployeeService;
 import com.test.validation.EmployeeValidation;
 import io.vertx.core.Vertx;
@@ -10,7 +11,7 @@ public class EmployeeRouter extends APIRouter{
 
   public EmployeeRouter(Router router, Vertx vertx)
   {
-    super(router, new EmployeeService(vertx), PATH.EMPLOYEE_PATH.getName(), new EmployeeValidation());
+    super(router, new EmployeeService(vertx), Entity.EMPLOYEE.getPath(), new EmployeeValidation());
   }
 
 }

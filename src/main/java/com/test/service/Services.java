@@ -1,8 +1,8 @@
 package com.test.service;
 
 import com.test.constant.Address;
-import com.test.constant.Collection;
 import com.test.constant.Constant;
+import com.test.constant.Entity;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
@@ -13,7 +13,7 @@ public interface Services {
 
   Vertx vertx();
 
-  Collection collection();
+  Entity collection();
 
   default Future<Message<String>> create(JsonObject document) {
     return vertx().eventBus().request(Address.CREATE.address(),JsonObject.of(Constant.COLLECTION,collection().getName(), Constant.DOCUMENT,document));

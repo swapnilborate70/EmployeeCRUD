@@ -18,6 +18,6 @@ public class ResponseConstants {
 
   public static final String NOT_FOUND_STATUS = "Document not found";
 
-   public static final String VALIDATION_FAILED = "Validation failed !!";
+  public static final String VALIDATION_FAILED = "Validation failed";
 
 }

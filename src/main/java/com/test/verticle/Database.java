@@ -1,8 +1,8 @@
 package com.test.verticle;
 
 import com.test.constant.Address;
-import com.test.constant.Collection;
 import com.test.constant.Constant;
+import com.test.constant.Entity;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.eventbus.Message;
@@ -113,7 +113,7 @@ public class Database extends AbstractVerticle {
     IndexOptions optionsEmpID = new IndexOptions().unique(true);
     IndexModel modelEmpID = new IndexModel(keysEmpID,optionsEmpID);
 
-    mongoClient.createIndexes(Collection.EMPLOYEE.getName(), List.of(modelEmpID))
+    mongoClient.createIndexes(Entity.EMPLOYEE.getName(), List.of(modelEmpID))
       .onSuccess(success->{
         System.out.println("Index created for Employee");
         logger.info("Index created for Employee");
@@ -128,7 +128,7 @@ public class Database extends AbstractVerticle {
 
     IndexModel modelDeptID = new IndexModel(keysDeptID,optionsDeptID);
 
-    mongoClient.createIndexes(Collection.DEPARTMENT.getName(), List.of(modelDeptID))
+    mongoClient.createIndexes(Entity.DEPARTMENT.getName(), List.of(modelDeptID))
       .onSuccess(success->{
         System.out.println("Index created for Department");
         logger.info("Index created for Department");
