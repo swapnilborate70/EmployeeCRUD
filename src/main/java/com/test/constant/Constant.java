@@ -24,7 +24,7 @@ public class Constant {
 
   public static final String STATUS = "status";
 
-  public static final String FAILED_KEY_AND_VALUES = "failed_keys_and_values";
+  public static final String INVALID_PAIRS = "invalid_pairs";
 
   public static final String PATH_VARIABLE = "id";
 

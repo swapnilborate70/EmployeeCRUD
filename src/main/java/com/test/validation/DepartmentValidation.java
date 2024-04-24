@@ -8,20 +8,20 @@ public class DepartmentValidation extends Validation {
 
 
   @Override
-  public JsonObject validate(JsonObject document) {
+  public JsonObject checkInvalidPairs(JsonObject document) {
 
-    JsonObject failedKeys = new JsonObject();
+    JsonObject invalidPairs = new JsonObject();
     //validate Department
     String deptID = document.getString(Constant.DEPT_ID);
     String name = document.getString(Constant.DEPT_NAME);
 
     if ((name == null || StringUtil.isNullOrEmpty(name))) {
-      failedKeys.put(Constant.NAME, name);
+      invalidPairs.put(Constant.NAME, name);
     }
 
     if ((deptID == null || StringUtil.isNullOrEmpty(deptID))) {
-      failedKeys.put(Constant.DEPT_ID, deptID);
+      invalidPairs.put(Constant.DEPT_ID, deptID);
     }
-    return failedKeys;
+    return invalidPairs;
   }
 }

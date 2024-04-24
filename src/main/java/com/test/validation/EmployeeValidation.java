@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 
 public class EmployeeValidation extends Validation{
   @Override
-  public JsonObject validate(JsonObject document) {
+  public JsonObject checkInvalidPairs(JsonObject document) {
 
-    JsonObject failedKeys = new JsonObject();
+    JsonObject invalidPairs = new JsonObject();
 
     //validate Employee
     String name = document.getString(Constant.NAME);
@@ -16,16 +16,16 @@ public class EmployeeValidation extends Validation{
     String empID = document.getString(Constant.EMP_ID);
 
     if ((name == null || StringUtil.isNullOrEmpty(name))) {
-      failedKeys.put(Constant.NAME, name);
+      invalidPairs.put(Constant.NAME, name);
     }
 
     if ((empID == null || StringUtil.isNullOrEmpty(empID))) {
-      failedKeys.put(Constant.EMP_ID, empID);
+      invalidPairs.put(Constant.EMP_ID, empID);
     }
 
     if ((deptID == null || StringUtil.isNullOrEmpty(deptID))) {
-      failedKeys.put(Constant.DEPT_ID, deptID);
+      invalidPairs.put(Constant.DEPT_ID, deptID);
     }
-    return failedKeys;
+    return invalidPairs;
   }
 }
