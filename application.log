@@ -40,3 +40,79 @@
 2024-04-24 15:33:44,199 [cluster-ClusterId{value='6628d9001aeb835e759ed35d', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=30166999}
 2024-04-24 15:33:44,356 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Department
 2024-04-24 15:33:44,357 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Employee
+2024-04-24 15:44:07,703 [vert.x-eventloop-thread-0] INFO  com.test.verticle.API - Http server started on port : 8888
+2024-04-24 15:44:08,027 [vert.x-eventloop-thread-1] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|reactive-streams", "version": "4.8.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.2+13-LTS-58"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ProvidersCodecRegistry{codecProviders=[MapOfCodecsProvider{codecsMap={class java.lang.Integer=org.bson.codecs.IntegerCodec@67b6db11, class java.lang.Double=org.bson.codecs.DoubleCodec@f56012a, class org.bson.BsonDocument=org.bson.codecs.BsonDocumentCodec@4cd233e1, class java.lang.String=org.bson.codecs.StringCodec@600150a2, class java.lang.Long=org.bson.codecs.LongCodec@31be61e0, class java.lang.Boolean=org.bson.codecs.BooleanCodec@ede79ac, class org.bson.Document=org.bson.codecs.DocumentCodec@534e1ead}}]}, ProvidersCodecRegistry{codecProviders=[MapOfCodecsProvider{codecsMap={class io.vertx.core.json.JsonObject=io.vertx.ext.mongo.impl.codec.json.JsonObjectCodec@39a0d026}}]}]}, clusterSettings={hosts=[127.0.0.1:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
+2024-04-24 15:44:08,030 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Database config read success
+2024-04-24 15:44:08,037 [cluster-ClusterId{value='6628db6f641cff656e84deb3', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=34299300}
+2024-04-24 15:44:08,220 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Employee
+2024-04-24 15:44:08,220 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Department
+2024-04-24 17:11:50,145 [vert.x-eventloop-thread-0] INFO  com.test.verticle.API - Http server started on port : 8888
+2024-04-24 17:11:50,599 [vert.x-eventloop-thread-1] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|reactive-streams", "version": "4.8.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.2+13-LTS-58"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ProvidersCodecRegistry{codecProviders=[MapOfCodecsProvider{codecsMap={class java.lang.Integer=org.bson.codecs.IntegerCodec@1162275c, class java.lang.String=org.bson.codecs.StringCodec@423770cd, class java.lang.Long=org.bson.codecs.LongCodec@4635a87c, class java.lang.Boolean=org.bson.codecs.BooleanCodec@1b7c4912, class java.lang.Double=org.bson.codecs.DoubleCodec@1ba4d5e6, class org.bson.Document=org.bson.codecs.DocumentCodec@626c6f47, class org.bson.BsonDocument=org.bson.codecs.BsonDocumentCodec@9f14d3e}}]}, ProvidersCodecRegistry{codecProviders=[MapOfCodecsProvider{codecsMap={class io.vertx.core.json.JsonObject=io.vertx.ext.mongo.impl.codec.json.JsonObjectCodec@703ca1cb}}]}]}, clusterSettings={hosts=[127.0.0.1:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
+2024-04-24 17:11:50,604 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Database config read success
+2024-04-24 17:11:50,615 [cluster-ClusterId{value='6628effe78a16e5f53beeba1', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=35730000}
+2024-04-24 17:11:50,896 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Employee
+2024-04-24 17:11:50,897 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Department
+2024-04-24 17:12:27,821 [vert.x-eventloop-thread-0] ERROR io.vertx.core.impl.ContextImpl - Unhandled exception
+java.lang.IllegalStateException: Response head already sent
+	at io.vertx.core.http.impl.Http1xServerResponse.checkHeadWritten(Http1xServerResponse.java:722)
+	at io.vertx.core.http.impl.Http1xServerResponse.setStatusCode(Http1xServerResponse.java:151)
+	at com.test.response.Response.jsonResponse(Response.java:12)
+	at com.test.router.APIRouter.lambda$create$8(APIRouter.java:83)
+	at io.vertx.core.impl.future.FutureImpl$1.onSuccess(FutureImpl.java:91)
+	at io.vertx.core.impl.future.FutureImpl$ListenerArray.onSuccess(FutureImpl.java:310)
+	at io.vertx.core.impl.future.FutureBase.lambda$emitSuccess$0(FutureBase.java:60)
+	at io.vertx.core.impl.ContextImpl.execute(ContextImpl.java:298)
+	at io.vertx.core.impl.DuplicatedContext.execute(DuplicatedContext.java:171)
+	at io.vertx.core.impl.future.FutureBase.emitSuccess(FutureBase.java:57)
+	at io.vertx.core.impl.future.FutureImpl.tryComplete(FutureImpl.java:259)
+	at io.vertx.core.Promise.complete(Promise.java:66)
+	at io.vertx.core.eventbus.impl.ReplyHandler.dispatch(ReplyHandler.java:97)
+	at io.vertx.core.eventbus.impl.HandlerRegistration$InboundDeliveryContext.execute(HandlerRegistration.java:137)
+	at io.vertx.core.eventbus.impl.DeliveryContextBase.next(DeliveryContextBase.java:80)
+	at io.vertx.core.eventbus.impl.DeliveryContextBase.dispatch(DeliveryContextBase.java:43)
+	at io.vertx.core.eventbus.impl.HandlerRegistration.dispatch(HandlerRegistration.java:98)
+	at io.vertx.core.eventbus.impl.ReplyHandler.doReceive(ReplyHandler.java:81)
+	at io.vertx.core.eventbus.impl.HandlerRegistration.lambda$receive$0(HandlerRegistration.java:49)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-04-24 17:12:49,541 [vert.x-eventloop-thread-0] ERROR io.vertx.core.impl.ContextImpl - Unhandled exception
+java.lang.IllegalStateException: Response head already sent
+	at io.vertx.core.http.impl.Http1xServerResponse.checkHeadWritten(Http1xServerResponse.java:722)
+	at io.vertx.core.http.impl.Http1xServerResponse.setStatusCode(Http1xServerResponse.java:151)
+	at com.test.response.Response.jsonResponse(Response.java:12)
+	at com.test.router.APIRouter.lambda$delete$2(APIRouter.java:49)
+	at io.vertx.core.impl.future.FutureImpl$1.onSuccess(FutureImpl.java:91)
+	at io.vertx.core.impl.future.FutureImpl$ListenerArray.onSuccess(FutureImpl.java:310)
+	at io.vertx.core.impl.future.FutureBase.lambda$emitSuccess$0(FutureBase.java:60)
+	at io.vertx.core.impl.ContextImpl.execute(ContextImpl.java:298)
+	at io.vertx.core.impl.DuplicatedContext.execute(DuplicatedContext.java:171)
+	at io.vertx.core.impl.future.FutureBase.emitSuccess(FutureBase.java:57)
+	at io.vertx.core.impl.future.FutureImpl.tryComplete(FutureImpl.java:259)
+	at io.vertx.core.Promise.complete(Promise.java:66)
+	at io.vertx.core.eventbus.impl.ReplyHandler.dispatch(ReplyHandler.java:97)
+	at io.vertx.core.eventbus.impl.HandlerRegistration$InboundDeliveryContext.execute(HandlerRegistration.java:137)
+	at io.vertx.core.eventbus.impl.DeliveryContextBase.next(DeliveryContextBase.java:80)
+	at io.vertx.core.eventbus.impl.DeliveryContextBase.dispatch(DeliveryContextBase.java:43)
+	at io.vertx.core.eventbus.impl.HandlerRegistration.dispatch(HandlerRegistration.java:98)
+	at io.vertx.core.eventbus.impl.ReplyHandler.doReceive(ReplyHandler.java:81)
+	at io.vertx.core.eventbus.impl.HandlerRegistration.lambda$receive$0(HandlerRegistration.java:49)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:470)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-04-24 17:44:25,809 [vert.x-eventloop-thread-0] INFO  com.test.verticle.API - Http server started on port : 8888
+2024-04-24 17:44:26,178 [vert.x-eventloop-thread-1] INFO  org.mongodb.driver.client - MongoClient with metadata {"driver": {"name": "mongo-java-driver|reactive-streams", "version": "4.8.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/21.0.2+13-LTS-58"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ProvidersCodecRegistry{codecProviders=[MapOfCodecsProvider{codecsMap={class java.lang.Integer=org.bson.codecs.IntegerCodec@77e3a549, class org.bson.BsonDocument=org.bson.codecs.BsonDocumentCodec@559b8c6b, class java.lang.Double=org.bson.codecs.DoubleCodec@342bb43, class java.lang.String=org.bson.codecs.StringCodec@5dbe7bd6, class java.lang.Boolean=org.bson.codecs.BooleanCodec@379d44c5, class org.bson.Document=org.bson.codecs.DocumentCodec@3e6c6e89, class java.lang.Long=org.bson.codecs.LongCodec@286252a4}}]}, ProvidersCodecRegistry{codecProviders=[MapOfCodecsProvider{codecsMap={class io.vertx.core.json.JsonObject=io.vertx.ext.mongo.impl.codec.json.JsonObjectCodec@62cecb5}}]}]}, clusterSettings={hosts=[127.0.0.1:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='30000 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, sendBufferSize=0}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, sendBufferSize=0}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, contextProvider=null}
+2024-04-24 17:44:26,182 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Database config read success
+2024-04-24 17:44:26,191 [cluster-ClusterId{value='6628f7a238d70d0f9db23464', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=38542400}
+2024-04-24 17:44:26,384 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Employee
+2024-04-24 17:44:26,408 [vert.x-eventloop-thread-1] INFO  com.test.verticle.Database - Index created for Department

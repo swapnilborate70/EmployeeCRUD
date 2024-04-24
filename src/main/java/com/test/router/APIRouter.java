@@ -15,48 +15,48 @@ public abstract class APIRouter {
   public Validation validate;
 
   public APIRouter(Router router, Services service, String path, Validation validation) {
-    this.service= service;
-    this.validate=validation;
+    this.service = service;
+    this.validate = validation;
 
     router.post(path).handler(this::validate).handler(this::create);
-    router.get(path+"/:id").handler(this::get);
-    router.get(path+"s").handler(this::getAll);
-    router.delete(path+"/:id").handler(this::delete);
-    router.put(path+"/:id").handler(this::validate).handler(this::update);
+    router.get(path + "/:id").handler(this::get);
+    router.get(path + "s").handler(this::getAll);
+    router.delete(path + "/:id").handler(this::delete);
+    router.put(path + "/:id").handler(this::validate).handler(this::update);
   }
 
   private void update(RoutingContext routingContext) {
     JsonObject document = routingContext.body().asJsonObject();
     int id = Integer.parseInt(routingContext.pathParam(Constant.PATH_VARIABLE));
 
-    service.update(id,document)
-      .onSuccess(success ->{
-        if(success.body() != null)
-        {
-          Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,ResponseConstants.UPDATE_SUCCESS_STATUS);
-        } else Response.jsonResponse(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
+    service.update(id, document)
+      .onSuccess(success -> {
+        if (success.body() != null) {
+          Response.jsonResponse(routingContext, ResponseConstants.SUCCESS_CODE, JsonObject.of(Constant.STATUS,ResponseConstants.UPDATE_SUCCESS_STATUS));
+        } else
+          Response.jsonResponse(routingContext, ResponseConstants.NOT_FOUND_CODE, JsonObject.of(Constant.STATUS,ResponseConstants.NOT_FOUND_STATUS));
       })
-      .onFailure(fail -> Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
+      .onFailure(fail -> Response.jsonResponse(routingContext, 500, JsonObject.of(Constant.STATUS, fail.getMessage())));
   }
 
   private void delete(RoutingContext routingContext) {
     int id = Integer.parseInt(routingContext.pathParam(Constant.PATH_VARIABLE));
     service.delete(id)
-      .onSuccess(success ->{
-        if(success.body() != null)
-        {
-          Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,ResponseConstants.DELETE_SUCCESS_STATUS);
-        } Response.jsonResponse(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
+      .onSuccess(success -> {
+        if (success.body() != null) {
+          Response.jsonResponse(routingContext, ResponseConstants.SUCCESS_CODE, JsonObject.of(Constant.STATUS,ResponseConstants.DELETE_SUCCESS_STATUS));
+        }
+        Response.jsonResponse(routingContext, ResponseConstants.NOT_FOUND_CODE, JsonObject.of(Constant.STATUS,ResponseConstants.NOT_FOUND_STATUS));
       })
-      .onFailure(fail -> Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
+      .onFailure(fail -> Response.jsonResponse(routingContext, 500, JsonObject.of(Constant.STATUS, fail.getMessage())));
   }
 
   private void getAll(RoutingContext routingContext) {
     service.getAll()
-      .onSuccess(success ->{
-        Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,success.body());
+      .onSuccess(success -> {
+        Response.jsonResponse(routingContext, ResponseConstants.SUCCESS_CODE, JsonObject.of(Constant.DATASET,success.body()));
       })
-      .onFailure(fail -> Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage()));
+      .onFailure(fail -> Response.jsonResponse(routingContext, 500, JsonObject.of(Constant.STATUS, fail.getMessage())));
   }
 
   private void get(RoutingContext routingContext) {
@@ -64,14 +64,12 @@ public abstract class APIRouter {
     service.get(id)
       .onSuccess(success -> {
         JsonObject document = success.body();
-        if(document != null)
-        {
-          Response.jsonResponse(routingContext,ResponseConstants.SUCCESS_CODE,document);
-        } else Response.jsonResponse(routingContext,ResponseConstants.NOT_FOUND_CODE,ResponseConstants.NOT_FOUND_STATUS);
+        if (document != null) {
+          Response.jsonResponse(routingContext, ResponseConstants.SUCCESS_CODE, document);
+        } else
+          Response.jsonResponse(routingContext, ResponseConstants.NOT_FOUND_CODE, JsonObject.of(Constant.STATUS,ResponseConstants.NOT_FOUND_STATUS));
       })
-      .onFailure(fail -> {
-        Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,fail.getMessage());
-      });
+      .onFailure(fail -> Response.jsonResponse(routingContext, 500, JsonObject.of(Constant.STATUS, fail.getMessage())));
   }
 
   public void create(RoutingContext routingContext)
@@ -79,12 +77,12 @@ public abstract class APIRouter {
     JsonObject document =  routingContext.body().asJsonObject();
     service.create(document)
       .onSuccess(success-> {
-        if(success !=null)
+        if(success.body() !=null)
         {
-          Response.jsonResponse(routingContext, ResponseConstants.CREATE_SUCCESS_CODE,ResponseConstants.CREATE_SUCCESS_STATUS);
-        }
+          Response.jsonResponse(routingContext, ResponseConstants.CREATE_SUCCESS_CODE,JsonObject.of(Constant.STATUS,ResponseConstants.CREATE_SUCCESS_STATUS));
+        }Response.jsonResponse(routingContext, ResponseConstants.FAILURE_CODE,JsonObject.of(Constant.STATUS,ResponseConstants.CREATE_FAIL_STATUS));
       })
-      .onFailure(fail-> Response.jsonResponse(routingContext,500,fail.getMessage()));
+      .onFailure(fail-> Response.jsonResponse(routingContext,500,JsonObject.of(Constant.STATUS,fail.getMessage())));
   }
 
   public void validate(RoutingContext routingContext)

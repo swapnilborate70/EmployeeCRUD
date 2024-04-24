@@ -28,4 +28,5 @@ public class Constant {
 
   public static final String PATH_VARIABLE = "id";
 
+  public static final String DATASET = "dataset";
 }
