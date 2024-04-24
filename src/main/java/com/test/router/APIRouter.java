@@ -89,7 +89,6 @@ public abstract class APIRouter {
 
   public void validate(RoutingContext routingContext)
   {
-
     JsonObject document = routingContext.body().asJsonObject();
     JsonObject failedKeys  = validate.validate(document);
 
