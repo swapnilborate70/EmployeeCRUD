@@ -91,15 +91,15 @@ public abstract class APIRouter {
   {
 
     JsonObject document = routingContext.body().asJsonObject();
-    boolean result  = validate.validate(document);
+    JsonObject failedKeys  = validate.validate(document);
 
-    if(result)
+    if(failedKeys.isEmpty())
     {
       routingContext.next();
     }
     else
     {
-      Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,JsonObject.of(Constant.STATUS,ResponseConstants.VALIDATION_FAILED,Constant.FAILED_KEYS,validate.countFailedValidations(document)));
+      Response.jsonResponse(routingContext,ResponseConstants.FAILURE_CODE,JsonObject.of(Constant.STATUS,ResponseConstants.VALIDATION_FAILED,Constant.FAILED_KEY_AND_VALUES,failedKeys));
     }
   }
 }
